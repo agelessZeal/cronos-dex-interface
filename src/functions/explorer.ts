@@ -151,6 +151,10 @@ const chains: ChainObject = {
     link: 'https://blockscout.moonriver.moonbeam.network',
     builder: explorers.blockscout,
   },
+  [ChainId.CRO]: {
+    link: 'https://cronos.crypto.org/explorer',
+    builder: explorers.blockscout,
+  },
 }
 
 export function getExplorerLink(
