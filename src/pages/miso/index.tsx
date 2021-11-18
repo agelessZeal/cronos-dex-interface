@@ -11,7 +11,7 @@ function MISO() {
   return (
     <>
       <Head>
-        <title>MISO | Sushi</title>
+        <title>MISO | Gate</title>
         <meta key="description" name="description" content="MISO by Sushi, an initial Sushi offering on steroids ..." />
       </Head>
       <div
