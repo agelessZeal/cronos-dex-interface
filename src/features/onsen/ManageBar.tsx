@@ -45,7 +45,7 @@ const ManageBar = ({ farm }) => {
     chainId,
     getAddress(farm.pair.id),
     farm.pair.type === PairType.KASHI ? Number(farm.pair.asset.decimals) : 18,
-    farm.pair.type === PairType.KASHI ? 'KMP' : 'SLP'
+    farm.pair.type === PairType.KASHI ? 'KMP' : 'GTLP'
   )
 
   const kashiPair = useKashiPair(farm.pair.id)
@@ -198,7 +198,7 @@ const ManageBar = ({ farm }) => {
             <ButtonError
               onClick={async () => {
                 try {
-                  // KMP decimals depend on asset, SLP is always 18
+                  // KMP decimals depend on asset, GTLP is always 18
                   const tx = await deposit(farm.id, BigNumber.from(parsedDepositValue.quotient.toString()))
                   addTransaction(tx, {
                     summary: `Deposit ${farm.pair.token0.name}/${farm.pair.token1.name}`,
@@ -232,7 +232,7 @@ const ManageBar = ({ farm }) => {
             <ButtonError
               onClick={async () => {
                 try {
-                  // KMP decimals depend on asset, SLP is always 18
+                  // KMP decimals depend on asset, GTLP is always 18
                   const tx = await withdraw(farm.id, BigNumber.from(parsedWithdrawValue.quotient.toString()))
                   addTransaction(tx, {
                     summary: `Withdraw ${farm.pair.token0.name}/${farm.pair.token1.name}`,

@@ -245,7 +245,7 @@ const PairLayout = ({ children }) => {
             {pair && pair.oracle.name === 'OlympusGate' && (
               <>
                 <div className="flex justify-between pt-3">
-                  <div className="text-xl text-high-emphesis">{i18n._(t`SLP`)}</div>
+                  <div className="text-xl text-high-emphesis">{i18n._(t`GTLP`)}</div>
                 </div>
                 {liquidityPair ? (
                   <>

@@ -477,7 +477,7 @@ const PoolWithdraw = ({ currencyA, currencyB }) => {
         </div>
         {userLiquidity?.equalTo(ZERO) && (
           <Alert
-            message={i18n._(t`Note: If your SLP is staked, you cannot remove your liquidity. You must unstake first.`)}
+            message={i18n._(t`Note: If your GTLP is staked, you cannot remove your liquidity. You must unstake first.`)}
             className="mb-4"
             type="information"
           />

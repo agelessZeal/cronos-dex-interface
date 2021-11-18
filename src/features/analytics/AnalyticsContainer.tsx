@@ -6,8 +6,8 @@ export default function AnalyticsContainer({ children }): JSX.Element {
   return (
     <>
       <Head>
-        <title>OlympusGate Liquidity Pair (SLP) Analytics | Gate</title>
-        <meta name="description" content="OlympusGate Liquidity Pair (SLP) Analytics by Sushi" />
+        <title>OlympusGate Liquidity Pair (GTLP) Analytics | Gate</title>
+        <meta name="description" content="OlympusGate Liquidity Pair (GTLP) Analytics by Sushi" />
       </Head>
 
       <Container id="analytics" maxWidth="full" className="grid h-full grid-flow-col grid-cols-10 px-4 mx-auto gap-9">
