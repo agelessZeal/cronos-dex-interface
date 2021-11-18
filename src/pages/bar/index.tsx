@@ -419,7 +419,7 @@ export default function Stake() {
                       <p className="text-sm font-bold md:text-lg text-high-emphesis">
                         {sushiBalance ? sushiBalance.toSignificant(4) : '-'}
                       </p>
-                      <p className="text-sm md:text-base text-primary">SUSHI</p>
+                      <p className="text-sm md:text-base text-primary">GATE</p>
                     </div>
                   </div>
                 </div>

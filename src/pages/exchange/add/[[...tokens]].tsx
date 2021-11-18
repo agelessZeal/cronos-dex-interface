@@ -352,6 +352,7 @@ export default function Add() {
           </button> */}
         </div>
 
+        {/* 
         <Alert
           message={
             noLiquidity ? (
@@ -370,7 +371,7 @@ export default function Add() {
             )
           }
           type="information"
-        />
+        /> */}
 
         <DoubleGlowShadow>
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
