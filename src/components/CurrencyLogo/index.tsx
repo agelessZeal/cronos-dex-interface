@@ -5,6 +5,8 @@ import Logo from '../Logo'
 import { WrappedTokenInfo } from '../../state/lists/wrappedTokenInfo'
 import useHttpLocations from '../../hooks/useHttpLocations'
 
+import Image from '../../components/Image'
+
 const BLOCKCHAIN = {
   [ChainId.MAINNET]: 'ethereum',
   [ChainId.BSC]: 'binanace',
@@ -60,7 +62,7 @@ const xDaiLogo =
 const CeloLogo = 'https://raw.githubusercontent.com/sushiswap/icons/master/token/celo.jpg'
 const PalmLogo = 'https://raw.githubusercontent.com/sushiswap/icons/master/token/palm.jpg'
 const MovrLogo = 'https://raw.githubusercontent.com/sushiswap/icons/master/token/movr.jpg'
-const CronosLogo = '/images/native-tokens/cro.png'
+const CronosLogo = '/cro.png'
 
 const LOGO: { readonly [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: EthereumLogo,
@@ -127,6 +129,13 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({
       return defaultUrls
     }
   }, [currency, uriLocations])
+
+  if (currency.chainId === ChainId.CRO) {
+    if (currency.isNative || currency.equals(WNATIVE[currency.chainId])) {
+      console.log('srcs:', currency, srcs)
+      return <Image src="/cro.png" width={size} height={size} alt={currency?.symbol} {...rest} />
+    }
+  }
 
   return <Logo srcs={srcs} width={size} height={size} alt={currency?.symbol} className={className} {...rest} />
 }
