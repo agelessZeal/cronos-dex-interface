@@ -20,7 +20,7 @@ const Celo = '/images/networks/celo-network.jpg'
 const Palm = 'https://raw.githubusercontent.com/sushiswap/icons/master/network/palm.jpg'
 const Moonriver = 'https://raw.githubusercontent.com/sushiswap/icons/master/network/moonriver.jpg'
 
-const Cronos = 'https://raw.githubusercontent.com/sushiswap/icons/master/network/moonriver.jpg'
+const Cronos = '/images/networks/cronos-network.png'
 
 export const NETWORK_ICON = {
   [ChainId.MAINNET]: Mainnet,

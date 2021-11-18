@@ -63,7 +63,7 @@ const Footer = () => {
           </ExternalLink>
         )}
 
-        <Polling />
+        {/* <Polling /> */}
       </div>
     </footer>
   )
