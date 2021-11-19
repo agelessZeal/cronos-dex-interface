@@ -58,7 +58,7 @@ const MeowshiButton: FC<MeowshiButtonProps> = ({ meowshiState }) => {
           decimals: sushiBalance.currency.decimals,
         })
       }
-      if (currencies[Field.INPUT]?.symbol === 'xSUSHI') {
+      if (currencies[Field.INPUT]?.symbol === 'xGATE') {
         tx = await meow({
           value: parseUnits(fields[Field.INPUT], sushiBalance.currency.decimals),
           decimals: xSushiBalance.currency.decimals,
@@ -71,7 +71,7 @@ const MeowshiButton: FC<MeowshiButtonProps> = ({ meowshiState }) => {
           decimals: xSushiBalance.currency.decimals,
         })
       }
-      if (currencies[Field.OUTPUT]?.symbol === 'xSUSHI') {
+      if (currencies[Field.OUTPUT]?.symbol === 'xGATE') {
         tx = await unmeow({
           value: parseUnits(fields[Field.INPUT], sushiBalance.currency.decimals),
           decimals: xSushiBalance.currency.decimals,

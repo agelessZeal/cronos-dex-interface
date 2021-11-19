@@ -201,9 +201,9 @@ export default function Vesting() {
                 <Link href="/stake">
                   <a className="flex items-center justify-between gap-3">
                     <div className="flex flex-col gap-1">
-                      <div className="font-bold text-white">{i18n._(t`Stake SUSHI for xSUSHI`)}</div>
+                      <div className="font-bold text-white">{i18n._(t`Stake SUSHI for xGATE`)}</div>
                       <div className="text-sm text-secondary">
-                        {t`Gain governance rights with xSUSHI and earn 5% APR (0.05% of
+                        {t`Gain governance rights with xGATE and earn 5% APR (0.05% of
                                                             all swaps from all chains)`}
                       </div>
                     </div>
@@ -219,7 +219,7 @@ export default function Vesting() {
                     <div className="flex flex-col gap-1">
                       <div className="font-bold text-white">{i18n._(t`Stack Yields with SAAVE`)}</div>
                       <div className="text-sm text-secondary">
-                        {t`Stake into xSUSHI add collateral as axSUSHI on Aave all in
+                        {t`Stake into xGATE add collateral as axSUSHI on Aave all in
                                                             one click`}
                       </div>
                     </div>
