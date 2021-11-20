@@ -132,7 +132,6 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({
 
   if (currency.chainId === ChainId.CRO) {
     if (currency.isNative || currency.equals(WNATIVE[currency.chainId])) {
-      console.log('srcs:', currency, srcs)
       return <Image src="/cro.png" width={size} height={size} alt={currency?.symbol} {...rest} />
     }
   }
