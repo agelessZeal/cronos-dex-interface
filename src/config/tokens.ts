@@ -189,7 +189,7 @@ export const XSUSHI_CALL = new Token(
 )
 export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC')
 
-export const XSUSHI = new Token(ChainId.MAINNET, '0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272', 18, 'xSUSHI', 'SushiBar')
+export const XSUSHI = new Token(ChainId.CRO, '0x9aeA92C5E2715f4105D17Fe0462Cf4F3ED05B3C0', 18, 'xGate', 'GateBar')
 
 export const LIFT = new Token(ChainId.MAINNET, '0xf9209d900f7ad1DC45376a2caA61c78f6dEA53B6', 18, 'LIFT', 'LiftKitchen')
 export const LFBTC = new Token(
