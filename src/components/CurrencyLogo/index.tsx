@@ -1,4 +1,4 @@
-import { ChainId, Currency, SUSHI_ADDRESS, WNATIVE } from '@sushiswap/sdk'
+import { ChainId, Currency, SUSHI_ADDRESS, Token, WNATIVE } from '@sushiswap/sdk'
 import React, { FunctionComponent, useMemo } from 'react'
 
 import Logo from '../Logo'
@@ -6,6 +6,7 @@ import { WrappedTokenInfo } from '../../state/lists/wrappedTokenInfo'
 import useHttpLocations from '../../hooks/useHttpLocations'
 
 import Image from '../../components/Image'
+import { XSUSHI } from '../../config/tokens'
 
 const BLOCKCHAIN = {
   [ChainId.MAINNET]: 'ethereum',
@@ -135,11 +136,20 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({
       return <Image src="/cro.png" width={size} height={size} alt={currency?.symbol} {...rest} />
     }
 
-    console.log('currency:', currency)
-
     if (
       currency instanceof WrappedTokenInfo &&
       currency.tokenInfo.address.toLowerCase() === SUSHI_ADDRESS[ChainId.CRO].toLowerCase()
+    ) {
+      return <Image src="/logo.png" width={size} height={size} alt={currency?.symbol} {...rest} />
+    }
+
+    if (currency instanceof Token && currency.address.toLowerCase() === SUSHI_ADDRESS[ChainId.CRO].toLowerCase()) {
+      return <Image src="/logo.png" width={size} height={size} alt={currency?.symbol} {...rest} />
+    }
+
+    if (
+      currency instanceof WrappedTokenInfo &&
+      currency.tokenInfo.address.toLowerCase() === XSUSHI.address.toLowerCase()
     ) {
       return <Image src="/logo.png" width={size} height={size} alt={currency?.symbol} {...rest} />
     }
