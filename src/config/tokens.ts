@@ -189,7 +189,9 @@ export const XSUSHI_CALL = new Token(
 )
 export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC')
 
-export const XSUSHI = new Token(ChainId.CRO, '0x9aeA92C5E2715f4105D17Fe0462Cf4F3ED05B3C0', 18, 'xGate', 'GateBar')
+export const XSUSHI = new Token(ChainId.CRO, '0x9aeA92C5E2715f4105D17Fe0462Cf4F3ED05B3C0', 18, 'xGATE', 'GateBar')
+
+export const GATE = new Token(ChainId.CRO, '0x0d0b26a9cf00d379f0be817c8629dd210ec750b8', 18, 'GATE', 'GATE')
 
 export const LIFT = new Token(ChainId.MAINNET, '0xf9209d900f7ad1DC45376a2caA61c78f6dEA53B6', 18, 'LIFT', 'LiftKitchen')
 export const LFBTC = new Token(
@@ -239,6 +241,7 @@ export const SUSHI: ChainTokenMap = {
   [ChainId.OKEX]: new Token(ChainId.OKEX, SUSHI_ADDRESS[ChainId.OKEX], 18, 'SUSHI', 'SushiToken'),
   [ChainId.HARMONY]: new Token(ChainId.HARMONY, SUSHI_ADDRESS[ChainId.HARMONY], 18, 'SUSHI', 'SushiToken'),
   [ChainId.HECO]: new Token(ChainId.HECO, SUSHI_ADDRESS[ChainId.HECO], 18, 'SUSHI', 'SushiToken'),
+  [ChainId.CRO]: new Token(ChainId.CRO, SUSHI_ADDRESS[ChainId.CRO], 18, 'GATE', 'GATE'),
 }
 
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {
