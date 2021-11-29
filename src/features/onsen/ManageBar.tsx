@@ -73,6 +73,8 @@ const ManageBar = ({ farm }) => {
         )
   )
 
+  console.log('balanceFiatValue:', balanceFiatValue, balanceFiatValue?.toExact())
+
   const stakedAmountFiatValue = CurrencyAmount.fromRawAmount(
     USDC[chainId],
     farm.pair.type === PairType.KASHI
@@ -96,7 +98,10 @@ const ManageBar = ({ farm }) => {
   const parsedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
 
   const APPROVAL_ADDRESSES = {
-    [Chef.MASTERCHEF]: { [ChainId.MAINNET]: MASTERCHEF_ADDRESS[ChainId.MAINNET] },
+    [Chef.MASTERCHEF]: {
+      [ChainId.MAINNET]: MASTERCHEF_ADDRESS[ChainId.MAINNET],
+      [ChainId.CRO]: MASTERCHEF_ADDRESS[ChainId.CRO],
+    },
     [Chef.MASTERCHEF_V2]: { [ChainId.MAINNET]: MASTERCHEF_V2_ADDRESS[ChainId.MAINNET] },
     [Chef.MINICHEF]: {
       [ChainId.MATIC]: MINICHEF_ADDRESS[ChainId.MATIC],

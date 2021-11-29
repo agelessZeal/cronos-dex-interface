@@ -54,7 +54,7 @@ function Farm(): JSX.Element {
       {/* <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
         <Menu positionsLength={positions.length} />
       </div> */}
-      <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
+      <div className={classNames('space-y-6 col-span-4 lg:col-span-4')}>
         <Search
           search={search}
           term={term}
