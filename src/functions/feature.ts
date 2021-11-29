@@ -20,7 +20,6 @@ const features = {
     Feature.KASHI,
     Feature.MIGRATE,
     Feature.ANALYTICS,
-    Feature.STAKING,
     Feature.MISO,
   ],
   [ChainId.ROPSTEN]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.BENTOBOX, Feature.KASHI],
@@ -49,7 +48,7 @@ const features = {
   [ChainId.XDAI]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.BENTOBOX, Feature.KASHI],
   [ChainId.MOONRIVER]: [Feature.AMM],
   [ChainId.ARBITRUM]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.BENTOBOX, Feature.KASHI],
-  [ChainId.CRO]: [Feature.STAKING],
+  [ChainId.CRO]: [Feature.STAKING, Feature.LIQUIDITY_MINING],
 }
 
 export function featureEnabled(feature: Feature, chainId: ChainId): boolean {
