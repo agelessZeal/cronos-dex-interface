@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Ether, JSBI, NATIVE, Token } from '@sushiswap/sdk'
+import { ChainId, Currency, CurrencyAmount, Ether, JSBI, NATIVE, Token } from '@sushiswap/sdk'
 import { PairState, useV2Pair } from '../../../hooks/useV2Pairs'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -21,13 +21,14 @@ import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 import { usePairAdder } from '../../../state/user/hooks'
 import { useTokenBalance } from '../../../state/wallet/hooks'
+import NetworkGuard from '../../../guards/Network'
 
 enum Fields {
   TOKEN0 = 0,
   TOKEN1 = 1,
 }
 
-export default function PoolFinder() {
+function PoolFinder() {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
 
@@ -180,3 +181,7 @@ export default function PoolFinder() {
     </Container>
   )
 }
+
+PoolFinder.Guard = NetworkGuard([ChainId.CRO])
+
+export default PoolFinder

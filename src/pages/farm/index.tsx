@@ -12,14 +12,16 @@ import useFarmRewards from '../../hooks/useFarmRewards'
 import { usePositions } from '../../features/onsen/hooks'
 import { useRouter } from 'next/router'
 import Provider from '../../features/kashi/context'
+import NetworkGuard from '../../guards/Network'
+import { ChainId } from '@sushiswap/sdk'
 
-export default function Farm(): JSX.Element {
+function Farm(): JSX.Element {
   const { chainId } = useActiveWeb3React()
 
   const router = useRouter()
   const type = router.query.filter == null ? 'all' : (router.query.filter as string)
 
-  const positions = usePositions(chainId)
+  // const positions = usePositions(chainId)
 
   const FILTER = {
     all: (farm) => farm.allocPoint !== '0',
@@ -49,9 +51,9 @@ export default function Farm(): JSX.Element {
         <title>Farm | Gate</title>
         <meta key="description" name="description" content="Farm SUSHI" />
       </Head>
-      <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
+      {/* <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
         <Menu positionsLength={positions.length} />
-      </div>
+      </div> */}
       <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
         <Search
           search={search}
@@ -79,4 +81,8 @@ export default function Farm(): JSX.Element {
   )
 }
 
-Farm.Provider = Provider
+// Farm.Provider = Provider
+
+Farm.Guard = NetworkGuard([ChainId.CRO])
+
+export default Farm

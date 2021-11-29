@@ -27,8 +27,9 @@ import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 import { useTokenBalancesWithLoadingIndicator } from '../../../state/wallet/hooks'
 import { useV2Pairs } from '../../../hooks/useV2Pairs'
+import NetworkGuard from '../../../guards/Network'
 
-export default function Pool() {
+function Pool() {
   const { i18n } = useLingui()
   const router = useRouter()
   const { account, chainId } = useActiveWeb3React()
@@ -167,3 +168,7 @@ export default function Pool() {
     </Container>
   )
 }
+
+Pool.Guard = NetworkGuard([ChainId.CRO])
+
+export default Pool

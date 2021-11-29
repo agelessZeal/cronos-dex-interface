@@ -74,8 +74,9 @@ import { useRouter } from 'next/router'
 import { useSwapCallback } from '../../../hooks/useSwapCallback'
 import { useUSDCValue } from '../../../hooks/useUSDCPrice'
 import { warningSeverity } from '../../../functions/prices'
+import NetworkGuard from '../../../guards/Network'
 
-export default function Swap() {
+function Swap() {
   const { i18n } = useLingui()
 
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -718,3 +719,7 @@ export default function Swap() {
     </Container>
   )
 }
+
+Swap.Guard = NetworkGuard([ChainId.CRO, ChainId.MAINNET])
+
+export default Swap

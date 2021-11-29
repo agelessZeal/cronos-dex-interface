@@ -47,12 +47,13 @@ import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
 import { useUserSlippageToleranceWithDefault } from '../../../state/user/hooks'
 import { useV2LiquidityTokenPermit } from '../../../hooks/useERC20Permit'
 import { useWalletModalToggle } from '../../../state/application/hooks'
+import NetworkGuard from '../../../guards/Network'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
 
 const REMOVE_TIPS = {}
 
-export default function Remove() {
+function Remove() {
   const { i18n } = useLingui()
   const router = useRouter()
   const tokens = router.query.tokens
@@ -866,3 +867,7 @@ export default function Remove() {
     </Container>
   )
 }
+
+Remove.Guard = NetworkGuard([ChainId.CRO])
+
+export default Remove

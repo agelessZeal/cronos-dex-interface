@@ -24,6 +24,7 @@ import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { classNames } from '../../functions'
 import { useGateBar } from '../../hooks/useGateBar'
+import NetworkGuard from '../../guards/Network'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -54,7 +55,7 @@ const buttonStyleConnectWallet = `${buttonStyle} text-high-emphesis bg-cyan-blue
 
 const fetcher = (query) => request('https://api.thegraph.com/subgraphs/name/matthewlilley/bar', query)
 
-export default function Stake() {
+function Stake() {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const sushiBalance = useTokenBalance(account ?? undefined, SUSHI[chainId])
@@ -475,3 +476,7 @@ export default function Stake() {
     </Container>
   )
 }
+
+Stake.Guard = NetworkGuard([ChainId.CRO])
+
+export default Stake

@@ -1,7 +1,7 @@
 import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
 import { AutoRow, RowBetween } from '../../../components/Row'
 import Button, { ButtonError } from '../../../components/Button'
-import { Currency, CurrencyAmount, Percent, WNATIVE, currencyEquals } from '@sushiswap/sdk'
+import { Currency, CurrencyAmount, Percent, WNATIVE, currencyEquals, ChainId } from '@sushiswap/sdk'
 import { ONE_BIPS, ZERO_PERCENT } from '../../../constants'
 import React, { useCallback, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../../modals/TransactionConfirmationModal'
@@ -44,10 +44,11 @@ import { useRouterContract } from '../../../hooks'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
 import { useWalletModalToggle } from '../../../state/application/hooks'
+import NetworkGuard from '../../../guards/Network'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
-export default function Add() {
+function Add() {
   const { i18n } = useLingui()
   const { account, chainId, library } = useActiveWeb3React()
   const router = useRouter()
@@ -539,3 +540,7 @@ export default function Add() {
     </>
   )
 }
+
+Add.Guard = NetworkGuard([ChainId.CRO])
+
+export default Add
