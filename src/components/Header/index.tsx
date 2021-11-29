@@ -71,7 +71,7 @@ function AppBar(): JSX.Element {
                         <NavLink href={'/farm'}>
                           <a
                             id={`farm-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            className="p-2 text-lg font-bold text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
                             {i18n._(t`Farm`)}
                           </a>
@@ -207,11 +207,11 @@ function AppBar(): JSX.Element {
                         </>
                       )}
 
-                    {library && library.provider.isMetaMask && (
+                    {/* {library && library.provider.isMetaMask && (
                       <div className="hidden sm:inline-block">
                         <Web3Network />
                       </div>
-                    )}
+                    )} */}
 
                     <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
                       {account && chainId && userEthBalance && (
@@ -286,14 +286,14 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
 
-                <Link href={'/migrate'}>
+                {/* <Link href={'/migrate'}>
                   <a
                     id={`migrate-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
                     {i18n._(t`Migrate`)}
                   </a>
-                </Link>
+                </Link> */}
 
                 {chainId && featureEnabled(Feature.LIQUIDITY_MINING, chainId) && (
                   <Link href={'/farm'}>
@@ -307,7 +307,7 @@ function AppBar(): JSX.Element {
                   </Link>
                 )}
 
-                {chainId && featureEnabled(Feature.KASHI, chainId) && (
+                {/* {chainId && featureEnabled(Feature.KASHI, chainId) && (
                   <>
                     <Link href={'/lend'}>
                       <a
@@ -327,7 +327,7 @@ function AppBar(): JSX.Element {
                       </a>
                     </Link>
                   </>
-                )}
+                )} */}
 
                 {chainId && featureEnabled(Feature.STAKING, chainId) && (
                   <Link href={'/stake'}>
@@ -340,7 +340,7 @@ function AppBar(): JSX.Element {
                   </Link>
                 )}
 
-                {chainId && featureEnabled(Feature.ANALYTICS, chainId) && (
+                {/* {chainId && featureEnabled(Feature.ANALYTICS, chainId) && (
                   <ExternalLink
                     id={`analytics-nav-link`}
                     href={ANALYTICS_URL[chainId] || 'https://analytics.sushi.com'}
@@ -348,7 +348,7 @@ function AppBar(): JSX.Element {
                   >
                     {i18n._(t`Analytics`)}
                   </ExternalLink>
-                )}
+                )} */}
               </div>
             </Popover.Panel>
           </>
