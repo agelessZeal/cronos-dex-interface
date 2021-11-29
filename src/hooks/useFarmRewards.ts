@@ -32,8 +32,6 @@ export function useMasterInfoCheck() {
 
   const contract = useMasterChefContract(false)
 
-  console.log('useMasterChef', contract)
-
   // Deposit
   const rewardPerBlock = useCallback(async () => {
     try {
@@ -56,13 +54,9 @@ export function useMasterChefRewardPerBlock() {
 
   const contract = useMasterChefContract(false)
 
-  console.log('useMasterChefRewardPerBlock', contract)
-
   const info = useSingleCallResult(contract, 'obelPerBlock')?.result
 
   const value = info?.[0]
-
-  console.log('useMasterChefRewardPerBlock 2', info)
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
 
@@ -111,6 +105,8 @@ export default function useFarmRewards() {
 
   const stakedBalaces = useTokenBalances(MASTERCHEF_ADDRESS[ChainId.CRO], liquidityTokens)
 
+  console.log('stakedBalaces:', stakedBalaces, MASTERCHEF_ADDRESS[ChainId.CRO], liquidityTokens)
+
   // const farms = useFarms({ chainId })
   const farmAddresses = useMemo(() => farms.map((farm) => farm.pair), [farms])
   // const swapPairs = useSushiPairs({ subset: farmAddresses, shouldFetch: !!farmAddresses, chainId })
@@ -134,6 +130,8 @@ export default function useFarmRewards() {
     useOnePrice(),
   ]
 
+  const obelPrice = 0.02
+
   const blocksPerDay = 86400 / Number(averageBlockTime)
 
   const map = (pool) => {
@@ -149,19 +147,19 @@ export default function useFarmRewards() {
     const pair = {
       decimals: 18,
       id: '0xd2285E1DfF5714a03abB081572e68929bdbC3204',
-      reserve0: 1929.887405995540289756,
-      reserve1: 1966.04641,
+      reserve0: 0.0887405995540289756,
+      reserve1: 0.04641,
       reserveETH: 1183.351142427706157233201110976883,
-      reserveUSD: 4,
+      reserveUSD: 0.004,
       timestamp: 1621898381,
       token0: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23',
         name: 'Wrapped CRO',
         symbol: 'WCRO',
-        totalSupply: 16840,
+        totalSupply: 1680,
       },
-      token0Price: 1.003849022219738620606344213098808,
+      token0Price: 0.749748,
       token1: {
         derivedETH: 0.034,
         id: '0x2D03bECE6747ADC00E1a131BBA1469C15fD11e03',
@@ -170,13 +168,13 @@ export default function useFarmRewards() {
         totalSupply: 16840,
       },
 
-      token1Price: 0.9961657359477946627790088931105365,
-      totalSupply: 0.000000316227765016,
+      token1Price: 0.014,
+      totalSupply: 0.316227765016,
       trackedReserveETH: 1183.351142427706157233201110976883,
       txCount: 81365,
       type: 0,
-      untrackedVolumeUSD: 46853896.79482616671033425777223395,
-      volumeUSD: 46844749.23711596607606598865310647,
+      untrackedVolumeUSD: 46853.79482616671033425777223395,
+      volumeUSD: 4684.23711596607606598865310647,
     }
 
     // const pair1w = swapPair1w
@@ -196,10 +194,10 @@ export default function useFarmRewards() {
 
       const defaultReward = {
         token: 'OBEL',
-        icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/sushi.jpg',
+        icon: '/obel.jpg',
         rewardPerBlock,
         rewardPerDay: rewardPerBlock * blocksPerDay,
-        rewardPrice: sushiPrice,
+        rewardPrice: obelPrice,
       }
 
       let rewards = [defaultReward]
@@ -286,7 +284,7 @@ export default function useFarmRewards() {
 
     if (stakedBalaces) {
       const stakedBalance = Object.values(stakedBalaces).find(
-        (token) => token.currency.address.toLowerCase() === pool.pair
+        (token) => token.currency.address.toLowerCase() === pool.pair.toLowerCase()
       )
       console.log('stakedBalace:', pool.pair, stakedBalance?.toExact())
       if (stakedBalance) {
