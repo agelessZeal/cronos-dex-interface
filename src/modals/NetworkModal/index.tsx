@@ -171,6 +171,17 @@ export const SUPPORTED_NETWORKS: {
     rpcUrls: ['https://rpc.moonriver.moonbeam.network'],
     blockExplorerUrls: ['https://blockscout.moonriver.moonbeam.network'],
   },
+  [ChainId.CRO]: {
+    chainId: '0x19',
+    chainName: 'Cronos',
+    nativeCurrency: {
+      name: 'Cronos',
+      symbol: 'CRO',
+      decimals: 18,
+    },
+    rpcUrls: ['https://evm-cronos.crypto.org'],
+    blockExplorerUrls: ['https://cronos.crypto.org/explorer'],
+  },
 }
 
 export default function NetworkModal(): JSX.Element | null {
