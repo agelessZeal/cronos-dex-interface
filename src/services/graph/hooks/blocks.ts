@@ -3,6 +3,7 @@ import { getAverageBlockTime, getBlock, getMassBlocks } from '../fetchers'
 import { useActiveWeb3React } from '../../../hooks'
 import useSWR, { SWRConfiguration } from 'swr'
 import { useMemo } from 'react'
+import { ChainId } from '@sushiswap/sdk'
 
 interface useBlockProps {
   timestamp?: number
@@ -46,6 +47,10 @@ export function useMassBlocks(timestamps: number[] | string[], swrConfig = undef
 
 export function useAverageBlockTime(swrConfig = undefined) {
   const { chainId } = useActiveWeb3React()
+
+  if (chainId === ChainId.CRO) {
+    return 5.6
+  }
 
   const { data } = useSWR(
     chainId ? ['averageBlockTime', chainId] : null,
