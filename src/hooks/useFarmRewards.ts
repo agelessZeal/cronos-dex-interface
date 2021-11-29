@@ -18,31 +18,113 @@ import {
 import { ChainId } from '@sushiswap/sdk'
 import { getAddress } from '@ethersproject/address'
 import useActiveWeb3React from './useActiveWeb3React'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { usePositions } from '../features/onsen/hooks'
 import { aprToApy } from '../functions/convert/apyApr'
+
+import { Token, ZERO, JSBI, MASTERCHEF_ADDRESS } from '@sushiswap/sdk'
+import { useTokenBalances } from '../state/wallet/hooks'
+import { useMasterChefContract } from '.'
+import { useSingleCallResult } from '../state/multicall/hooks'
+
+export function useMasterInfoCheck() {
+  const { account } = useActiveWeb3React()
+
+  const contract = useMasterChefContract(false)
+
+  console.log('useMasterChef', contract)
+
+  // Deposit
+  const rewardPerBlock = useCallback(async () => {
+    try {
+      let tx = await contract?.obelPerBlock()
+      return tx
+    } catch (e) {
+      console.error(e)
+      return e
+    }
+  }, [account, contract])
+  return { rewardPerBlock }
+}
+
+export function useMasterChefRewardPerBlock() {
+  // const { account, chainId } = useActiveWeb3React()
+
+  const { rewardPerBlock } = useMasterInfoCheck()
+
+  const chainId = ChainId.CRO
+
+  const contract = useMasterChefContract(false)
+
+  console.log('useMasterChefRewardPerBlock', contract)
+
+  const info = useSingleCallResult(contract, 'obelPerBlock')?.result
+
+  const value = info?.[0]
+
+  console.log('useMasterChefRewardPerBlock 2', info)
+
+  const amount = value ? JSBI.BigInt(value.toString()) : undefined
+
+  return useMemo(() => {
+    if (amount) {
+      const rewardPerblock = JSBI.toNumber(amount) / 1e18
+      return rewardPerblock
+    }
+    return 0
+  }, [amount])
+}
 
 export default function useFarmRewards() {
   const { chainId } = useActiveWeb3React()
 
-  const positions = usePositions(chainId)
+  // const positions = usePositions(chainId)
 
   const block1w = useBlock({ daysAgo: 7, chainId })
 
-  const farms = useFarms({ chainId })
+  const farms = [
+    {
+      accSushiPerShare: '',
+      allocPoint: 100,
+      balance: 0,
+      chef: 0,
+      id: '0',
+      lastRewardTime: 1631266290,
+      owner: {
+        id: '0xFA01e72d662E1d8d7cb0f9D98A9bA9f6cC450490',
+        totalAllocPoint: 100,
+      },
+      pair: '0xd2285E1DfF5714a03abB081572e68929bdbC3204',
+      slpBalance: 0,
+      userCount: '0',
+    },
+  ]
+
+  const liquidityTokens = useMemo(
+    () =>
+      farms.map((farm) => {
+        const token = new Token(chainId, getAddress(farm.pair), 18, 'GTLP')
+        return token
+      }),
+    [farms]
+  )
+
+  const stakedBalaces = useTokenBalances(MASTERCHEF_ADDRESS[ChainId.CRO], liquidityTokens)
+
+  // const farms = useFarms({ chainId })
   const farmAddresses = useMemo(() => farms.map((farm) => farm.pair), [farms])
-  const swapPairs = useSushiPairs({ subset: farmAddresses, shouldFetch: !!farmAddresses, chainId })
-  const swapPairs1w = useSushiPairs({
-    subset: farmAddresses,
-    block: block1w,
-    shouldFetch: !!block1w && !!farmAddresses,
-    chainId,
-  })
-  const kashiPairs = useKashiPairs({ subset: farmAddresses, shouldFetch: !!farmAddresses, chainId })
+  // const swapPairs = useSushiPairs({ subset: farmAddresses, shouldFetch: !!farmAddresses, chainId })
+  // const swapPairs1w = useSushiPairs({
+  //   subset: farmAddresses,
+  //   block: block1w,
+  //   shouldFetch: !!block1w && !!farmAddresses,
+  //   chainId,
+  // })
+  // const kashiPairs = useKashiPairs({ subset: farmAddresses, shouldFetch: !!farmAddresses, chainId })
 
   const averageBlockTime = useAverageBlockTime()
-  const masterChefV1TotalAllocPoint = useMasterChefV1TotalAllocPoint()
-  const masterChefV1SushiPerBlock = useMasterChefV1SushiPerBlock()
+  const masterChefV1TotalAllocPoint = 100 //
+  const masterChefV1SushiPerBlock = useMasterChefRewardPerBlock() // useMasterChefV1SushiPerBlock()
 
   const [sushiPrice, ethPrice, maticPrice, stakePrice, onePrice] = [
     useSushiPrice(),
@@ -59,14 +141,47 @@ export default function useFarmRewards() {
     pool.owner = pool?.owner || pool?.masterChef || pool?.miniChef
     pool.balance = pool?.balance || pool?.slpBalance
 
-    const swapPair = swapPairs?.find((pair) => pair.id === pool.pair)
-    const swapPair1w = swapPairs1w?.find((pair) => pair.id === pool.pair)
-    const kashiPair = kashiPairs?.find((pair) => pair.id === pool.pair)
+    // const swapPair = swapPairs?.find((pair) => pair.id === pool.pair)
+    // const swapPair1w = swapPairs1w?.find((pair) => pair.id === pool.pair)
+    // const kashiPair = kashiPairs?.find((pair) => pair.id === pool.pair)
 
-    const pair = swapPair || kashiPair
-    const pair1w = swapPair1w
+    // const pair = swapPair
+    const pair = {
+      decimals: 18,
+      id: '0xd2285E1DfF5714a03abB081572e68929bdbC3204',
+      reserve0: 1929.887405995540289756,
+      reserve1: 1966.04641,
+      reserveETH: 1183.351142427706157233201110976883,
+      reserveUSD: 4,
+      timestamp: 1621898381,
+      token0: {
+        derivedETH: 0.0003068283960261003490764609134664169,
+        id: '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23',
+        name: 'Wrapped CRO',
+        symbol: 'WCRO',
+        totalSupply: 16840,
+      },
+      token0Price: 1.003849022219738620606344213098808,
+      token1: {
+        derivedETH: 0.034,
+        id: '0x2D03bECE6747ADC00E1a131BBA1469C15fD11e03',
+        name: 'VVSToken',
+        symbol: 'VVS',
+        totalSupply: 16840,
+      },
 
-    const type = swapPair ? PairType.SWAP : PairType.KASHI
+      token1Price: 0.9961657359477946627790088931105365,
+      totalSupply: 0.000000316227765016,
+      trackedReserveETH: 1183.351142427706157233201110976883,
+      txCount: 81365,
+      type: 0,
+      untrackedVolumeUSD: 46853896.79482616671033425777223395,
+      volumeUSD: 46844749.23711596607606598865310647,
+    }
+
+    // const pair1w = swapPair1w
+
+    const type = PairType.SWAP // swapPair ? PairType.SWAP : PairType.KASHI
 
     const blocksPerHour = 3600 / averageBlockTime
 
@@ -80,7 +195,7 @@ export default function useFarmRewards() {
       const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * sushiPerBlock
 
       const defaultReward = {
-        token: 'SUSHI',
+        token: 'OBEL',
         icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/sushi.jpg',
         rewardPerBlock,
         rewardPerDay: rewardPerBlock * blocksPerDay,
@@ -167,14 +282,22 @@ export default function useFarmRewards() {
 
     const rewards = getRewards()
 
-    const balance = swapPair ? Number(pool.balance / 1e18) : pool.balance / 10 ** kashiPair.token0.decimals
+    let balance = Number(pool.balance / 1e18)
 
-    const tvl = swapPair
-      ? (balance / Number(swapPair.totalSupply)) * Number(swapPair.reserveUSD)
-      : balance * kashiPair.token0.derivedETH * ethPrice
+    if (stakedBalaces) {
+      const stakedBalance = Object.values(stakedBalaces).find(
+        (token) => token.currency.address.toLowerCase() === pool.pair
+      )
+      console.log('stakedBalace:', pool.pair, stakedBalance?.toExact())
+      if (stakedBalance) {
+        balance = parseFloat(stakedBalance.toExact())
+      }
+    }
 
-    const feeApyPerYear = swapPair
-      ? aprToApy((((((pair?.volumeUSD - pair1w?.volumeUSD) * 0.0025) / 7) * 365) / pair?.reserveUSD) * 100, 3650) / 100
+    const tvl = (balance / Number(pair.totalSupply)) * Number(pair.reserveUSD)
+
+    const feeApyPerYear = pair
+      ? aprToApy((((((pair?.volumeUSD - pair?.volumeUSD) * 0.0025) / 7) * 365) / pair?.reserveUSD) * 100, 3650) / 100
       : 0
 
     const feeApyPerMonth = feeApyPerYear / 12
@@ -196,14 +319,13 @@ export default function useFarmRewards() {
     const roiPerDay = rewardAprPerDay + feeApyPerDay
     const roiPerYear = rewardAprPerYear + feeApyPerYear
 
-    const position = positions.find((position) => position.id === pool.id && position.chef === pool.chef)
+    // const position = positions.find((position) => position.id === pool.id && position.chef === pool.chef)
 
     return {
       ...pool,
-      ...position,
       pair: {
         ...pair,
-        decimals: pair.type === PairType.KASHI ? Number(pair.asset.tokenInfo.decimals) : 18,
+        decimals: 18,
         type,
       },
       balance,
@@ -225,12 +347,11 @@ export default function useFarmRewards() {
     }
   }
 
-  return farms
-    .filter((farm) => {
-      return (
-        (swapPairs && swapPairs.find((pair) => pair.id === farm.pair)) ||
-        (kashiPairs && kashiPairs.find((pair) => pair.id === farm.pair))
-      )
-    })
-    .map(map)
+  return (
+    farms
+      // .filter((farm) => {
+      //   return swapPairs && swapPairs.find((pair) => pair.id === farm.pair)
+      // })
+      .map(map)
+  )
 }

@@ -63,7 +63,7 @@ export default function useMasterChef(chef: Chef) {
         if (chef === Chef.MASTERCHEF) {
           tx = await contract?.deposit(pid, Zero)
         } else if (chef === Chef.MASTERCHEF_V2) {
-          const pendingSushi = await contract?.pendingSushi(pid, account)
+          const pendingSushi = await contract?.pendingObel(pid, account)
 
           const balanceOf = await sushi?.balanceOf(contract?.address)
 
