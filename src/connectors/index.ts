@@ -36,6 +36,7 @@ const RPC = {
   [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
   [ChainId.PALM]: 'https://palm-mainnet.infura.io/v3/da5fbfafcca14b109e2665290681e267',
   [ChainId.CRO]: 'https://evm-cronos.crypto.org',
+  [ChainId.SGB]: 'https://songbird.towolabs.com/howart26-c4f0-467e-a647-82b11e27bb3b/rpc',
 }
 
 export function getNetwork(defaultChainId, urls = RPC) {
@@ -113,7 +114,7 @@ export const portis = new PortisConnector({
 // mainnet only
 export const walletlink = new WalletLinkConnector({
   url: RPC[ChainId.MAINNET],
-  appName: 'OlympusGate',
+  appName: 'OracleDex',
   appLogoUrl: 'https://raw.githubusercontent.com/sushiswap/art/master/sushi/logo-256x256.png',
 })
 

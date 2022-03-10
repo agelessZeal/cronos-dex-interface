@@ -14,4 +14,5 @@ export const GRAPH_HOST = {
   [ChainId.HARMONY]: 'https://sushi.graph.t.hmny.io',
   [ChainId.OKEX]: HYPER_GRAPH,
   [ChainId.HECO]: HYPER_GRAPH,
+  [ChainId.SGB]: THE_GRAPH,
 }

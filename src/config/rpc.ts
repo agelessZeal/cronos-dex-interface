@@ -26,6 +26,7 @@ const rpc = {
   [ChainId.PALM]: 'https://palm-mainnet.infura.io/v3/da5fbfafcca14b109e2665290681e267',
   [ChainId.CELO]: 'https://forno.celo.org',
   [ChainId.CRO]: 'https://evm-cronos.crypto.org',
+  [ChainId.SGB]: 'https://songbird.towolabs.com/howart26-c4f0-467e-a647-82b11e27bb3b/rpc',
 }
 
 export default rpc

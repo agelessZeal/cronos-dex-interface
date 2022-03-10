@@ -16,6 +16,7 @@ const BLOCKCHAIN = {
   [ChainId.HARMONY]: 'harmony',
   [ChainId.MATIC]: 'polygon',
   [ChainId.XDAI]: 'xdai',
+  [ChainId.SGB]: 'songbird',
   // [ChainId.OKEX]: 'okex',
 }
 
@@ -65,6 +66,8 @@ const PalmLogo = 'https://raw.githubusercontent.com/sushiswap/icons/master/token
 const MovrLogo = 'https://raw.githubusercontent.com/sushiswap/icons/master/token/movr.jpg'
 const CronosLogo = '/cro.png'
 
+const SongbirdLogo = 'https://s2.coinmarketcap.com/static/img/coins/64x64/12186.png'
+
 const LOGO: { readonly [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: EthereumLogo,
   [ChainId.FANTOM]: FantomLogo,
@@ -90,6 +93,7 @@ const LOGO: { readonly [chainId in ChainId]?: string } = {
   [ChainId.PALM_TESTNET]: PalmLogo,
   [ChainId.MOONRIVER]: MovrLogo,
   [ChainId.CRO]: CronosLogo,
+  [ChainId.SGB]: SongbirdLogo,
 }
 
 interface CurrencyLogoProps {
@@ -152,6 +156,22 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({
       currency.tokenInfo.address.toLowerCase() === XSUSHI.address.toLowerCase()
     ) {
       return <Image src="/logo.png" width={size} height={size} alt={currency?.symbol} {...rest} />
+    }
+  }
+
+  if (currency instanceof WrappedTokenInfo) {
+    if (currency.tokenInfo.chainId === ChainId.SGB) {
+      return (
+        <Image src={`/CAND.png`} width={size} height={size} alt={currency?.symbol} className={className} />
+        // <Logo
+        //   srcs={['/CAND.png']}
+        //   width={size}
+        //   height={size}
+        //   alt={currency?.symbol}
+        //   className={className}
+        //   style={style}
+        // />
+      )
     }
   }
 

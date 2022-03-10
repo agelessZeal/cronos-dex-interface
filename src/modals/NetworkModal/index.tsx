@@ -182,6 +182,17 @@ export const SUPPORTED_NETWORKS: {
     rpcUrls: ['https://evm-cronos.crypto.org'],
     blockExplorerUrls: ['https://cronos.crypto.org/explorer'],
   },
+  [ChainId.SGB]: {
+    chainId: '0x13',
+    chainName: 'Songbird',
+    nativeCurrency: {
+      name: 'Songbird',
+      symbol: 'SGB',
+      decimals: 18,
+    },
+    rpcUrls: ['https://rpc.sgbftso.com/http'],
+    blockExplorerUrls: ['https://songbird-explorer.flare.network'],
+  },
 }
 
 export default function NetworkModal(): JSX.Element | null {
@@ -215,6 +226,7 @@ export default function NetworkModal(): JSX.Element | null {
           ChainId.PALM,
           ChainId.MOONRIVER,
           ChainId.CRO,
+          ChainId.SGB,
         ].map((key: ChainId, i: number) => {
           if (chainId === key) {
             return (

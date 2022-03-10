@@ -22,6 +22,8 @@ const Moonriver = 'https://raw.githubusercontent.com/sushiswap/icons/master/netw
 
 const Cronos = '/images/networks/cronos-network.png'
 
+const Songbird = 'https://s2.coinmarketcap.com/static/img/coins/64x64/12186.png'
+
 export const NETWORK_ICON = {
   [ChainId.MAINNET]: Mainnet,
   [ChainId.ROPSTEN]: Ropsten,
@@ -50,6 +52,7 @@ export const NETWORK_ICON = {
   [ChainId.PALM]: Palm,
   [ChainId.MOONRIVER]: Moonriver,
   [ChainId.CRO]: Cronos,
+  [ChainId.SGB]: Songbird,
 }
 
 export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
@@ -80,4 +83,5 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   [ChainId.PALM]: 'Palm',
   [ChainId.MOONRIVER]: 'Moonriver',
   [ChainId.CRO]: 'Cronos',
+  [ChainId.SGB]: 'Songbird',
 }

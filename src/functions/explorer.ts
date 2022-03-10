@@ -155,6 +155,10 @@ const chains: ChainObject = {
     link: 'https://cronos.crypto.org/explorer',
     builder: explorers.blockscout,
   },
+  [ChainId.SGB]: {
+    link: 'https://songbird-explorer.flare.network',
+    builder: explorers.blockscout,
+  },
 }
 
 export function getExplorerLink(
